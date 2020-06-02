@@ -67,13 +67,13 @@ async def get_intext(doi, citation):
     in_text = "("
     
     if num_authors == 1:
-        in_text += authors[0]['family']
+        in_text += authors[0]['family'].title()
     elif num_authors == 2:
-        in_text += f"{authors[0]['family']} and {authors[1]['family']}"
+        in_text += f"{authors[0]['family'].title()} and {authors[1]['family'].title()}"
     elif num_authors == 3:
-        in_text += f"{authors[0]['family']}, {authors[1]['family']} and {authors[2]['family']}"
+        in_text += f"{authors[0]['family'].title()}, {authors[1]['family'].title()} and {authors[2]['family'].title()}"
     elif num_authors > 3:
-        in_text += f"{authors[0]['family']} et al."
+        in_text += f"{authors[0]['family'].title()} et al."
     
     in_text += f", {year})"
     return in_text

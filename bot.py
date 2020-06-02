@@ -23,49 +23,25 @@ async def create_user_profile(bot: bot, msg: Message):
 async def my_function(client, message): 
     chat_id = message.chat.id
     msg = message["text"]
-    print(msg)
     if "doi.org" in msg:
         msg = msg.replace("https://doi.org/", "").replace("doi.org/", "")
-        try:
-            citation = await get_cite(msg)
-            if not citation:
-                text = "ERROR: DOI Not Found!"
-                print(text)
-                await bot.send_message(chat_id, text)
-            else:
-                pdf = await get_pdf(msg)
-                if not pdf:
-                    pdf = "PDF not available!"
-                    await bot.send_message(chat_id, pdf)
-                else:
-                    await bot.send_document(chat_id, pdf)
-                in_text  = await get_intext(msg, citation)
-                await bot.send_message(chat_id, citation, disable_web_page_preview=True)
-                await bot.send_message(chat_id, in_text, disable_web_page_preview=True)
-        except Exception as e:
-            print(e)
-            text = "Citation not available. Make sure your link is correct."
+    try:
+        citation = await get_cite(msg)
+        if not citation:
+            text = "ERROR: DOI Not Found!"
+            print(text)
             await bot.send_message(chat_id, text)
-    else:
-        try:
-            citation = await get_cite(msg)
-            if not citation:
-                text = "ERROR: DOI Not Found!"
-                print(text)
-                await bot.send_message(chat_id, text)
-            else:
-                pdf = await get_pdf(msg)
-                if not pdf:
-                    pdf = "PDF not available!"
-                    await bot.send_message(chat_id, pdf)
-                else:
-                    await bot.send_document(chat_id, pdf)
-                in_text  = await get_intext(msg, citation)
-                await bot.send_message(chat_id, citation, disable_web_page_preview=True)
-                await bot.send_message(chat_id, in_text, disable_web_page_preview=True)
-        except Exception as e:
-            print(e)
-            text = "Citation not available. Make sure your link is correct."
-            await bot.send_message(chat_id, text)
+        else:
+            pdf = await get_pdf(msg)
+            if not pdf:
+                pdf = "PDF not available!"
+            await bot.send_message(chat_id, pdf)
+            in_text  = await get_intext(msg, citation)
+            await bot.send_message(chat_id, citation, disable_web_page_preview=True)
+            await bot.send_message(chat_id, in_text, disable_web_page_preview=True)
+    except Exception as e:
+        print(e)
+        text = "Citation not available. Make sure your link/code. is correct."
+        await bot.send_message(chat_id, text)
 bot.run()
 
