@@ -1,7 +1,7 @@
 from pyrogram import Client, Message, Filters
 import requests
 import datetime
-from intext import get_cite, get_pdf, get_intext
+from data import get_cite, get_pdf, get_intext
 from bs4 import BeautifulSoup as soup
 
 time = datetime.datetime.now()
