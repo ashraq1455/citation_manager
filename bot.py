@@ -40,7 +40,6 @@ async def my_function(client, message):
                 else:
                     await bot.send_document(chat_id, pdf)
                 in_text  = await get_intext(msg, citation)
-                await bot.send_message(chat_id, pdf)
                 await bot.send_message(chat_id, citation, disable_web_page_preview=True)
                 await bot.send_message(chat_id, in_text, disable_web_page_preview=True)
         except Exception as e:
