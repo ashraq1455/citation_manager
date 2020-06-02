@@ -30,7 +30,7 @@ async def get_authors(doi):
     async with aiohttp.ClientSession() as session:
         async with session.get(url, headers=a_headers) as res:
             response = await res.json()
-    authors = response['authors']
+    authors = response['author']
     return authors
 
 async def get_title(doi):
