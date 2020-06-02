@@ -39,7 +39,7 @@ def cite(doi):
     for x in r:
         full_citation += x.decode("utf-8")
 
-    final = full_citation.replace("doi:", "Available from: https://doi.org/") + f"[Accessed On: {time.day} {time.strftime('%B')} {time.year}]."
+    final = full_citation.replace("doi:", "Available from: https://doi.org/") + f"[Accessed: {time.day} {time.strftime('%B')} {time.year}]."
 
     print(final)
     return final
