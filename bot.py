@@ -34,7 +34,12 @@ async def my_function(client, message):
                 await bot.send_message(chat_id, text)
             else:
                 pdf = await get_pdf(msg)
-                in_text  = await get_intext(msg)
+                if not pdf:
+                    pdf = "PDF not available!"
+                    await bot.send_message(chat_id, pdf)
+                else:
+                    await bot.send_document(chat_id, pdf)
+                in_text  = await get_intext(msg, citation)
                 await bot.send_message(chat_id, pdf)
                 await bot.send_message(chat_id, citation, disable_web_page_preview=True)
                 await bot.send_message(chat_id, in_text, disable_web_page_preview=True)
@@ -51,8 +56,12 @@ async def my_function(client, message):
                 await bot.send_message(chat_id, text)
             else:
                 pdf = await get_pdf(msg)
-                in_text  = await get_intext(msg)
-                await bot.send_message(chat_id, pdf)
+                if not pdf:
+                    pdf = "PDF not available!"
+                    await bot.send_message(chat_id, pdf)
+                else:
+                    await bot.send_document(chat_id, pdf)
+                in_text  = await get_intext(msg, citation)
                 await bot.send_message(chat_id, citation, disable_web_page_preview=True)
                 await bot.send_message(chat_id, in_text, disable_web_page_preview=True)
         except Exception as e:

@@ -50,7 +50,7 @@ async def get_cite(doi):
             async with session.get(url, headers=c_headers) as res:
                 citation = await res.text(encoding="utf-8")
             citation = citation[:citation.index(").")].replace("&", "and") + citation[citation.index(")."):]
-            citation = citation.strip()[:-1] + f" [Accessed On: {time.day} {time.strftime('%B')} {time.year}]."
+            citation = citation.strip()[:-1] + f" [Accessed: {time.day} {time.strftime('%B')} {time.year}]."
             journal_title = await get_title(doi)
             citation = citation.replace(str(journal_title), f"<i>{journal_title}</i>")
             return citation
@@ -58,9 +58,8 @@ async def get_cite(doi):
         print(e)
         return None
 
-async def get_intext(doi):
+async def get_intext(doi, citation):
     authors = await get_authors(doi)
-    citation = await get_cite(doi)
     year = citation[citation.index("(")+1:citation.index(").")]
     
     num_authors = len(authors)
