@@ -38,7 +38,7 @@ async def get_title(doi):
     async with aiohttp.ClientSession() as session:
         async with session.get(url, headers=a_headers) as res:
             response = await res.json()
-    journal_title = response['title']
+    journal_title = response['container-title']
     return journal_title
 
 
